@@ -9,53 +9,55 @@ datasource db {
 }
 
 model User {
-  id                String     @id @default(uuid())
+  id String @id @default(uuid())
 
-  email             String     @unique
-  password          String
+  email    String @unique
+  password String
 
-  displayName       String
-  picture           String?
+  displayName String
+  picture     String?
 
-  accounts          Account[]
-  role              UserRole   @default(REGULAR)
-  method            AuthMethod
+  accounts Account[]
+  role     UserRole   @default(REGULAR)
+  method   AuthMethod
 
-  isVerified        Boolean    @default(false) @map("is_verified")
-  isTwoFactorEnable Boolean    @default(false) @map("is_two_factor_enable")
+  isVerified        Boolean @default(false) @map("is_verified")
+  isTwoFactorEnable Boolean @default(false) @map("is_two_factor_enable")
 
-  createdAt         DateTime   @default(now()) @map("created_at")
-  updatedAt         DateTime   @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("users")
 }
 
 model Account {
-  id           String   @id @default(uuid())
+  id String @id @default(uuid())
 
-  type         String
-  provider     String
+  type     String
+  provider String
 
-  refreshToken String?  @map("refresh_token")
-  accessToken  String?  @map("access_token")
-  expiresAt    Int      @map("expires_at")
+  refreshToken String? @map("refresh_token")
+  accessToken  String? @map("access_token")
+  expiresAt    Int     @map("expires_at")
 
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  user         User?    @relation(fields: [userId], references: [id])
-  userId       String   @map("user_id")
+  user   User?  @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
 
   @@map("accounts")
 }
 
 model Token {
-  id        String    @id @default(uuid())
+  id String @id @default(uuid())
 
   email     String
   token     String    @unique
   type      TokenType
   expiresIn DateTime  @map("expires_in")
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("tokens")
 }
