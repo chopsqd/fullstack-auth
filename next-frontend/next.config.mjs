@@ -4,7 +4,8 @@ const nextConfig = {
 		missingSuspenseWithCSRBailout: false
 	},
 	env: {
-		SERVER_URL: process.env.SERVER_URL
+		SERVER_URL: process.env.SERVER_URL,
+		GOOGLE_RECAPTCHA_SITE_KEY: process.env.GOOGLE_RECAPTCHA_SITE_KEY
 	},
 	images: {
 		remotePatterns: [
