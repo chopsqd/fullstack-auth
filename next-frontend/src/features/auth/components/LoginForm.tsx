@@ -9,15 +9,16 @@ import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage,
 import { useTheme } from 'next-themes'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { toast } from 'sonner'
+import { useLoginMutation } from '@/features/auth/hooks'
 
 export function LoginForm() {
 	const {theme} = useTheme()
+	const {login, isLoadingLogin} = useLoginMutation()
 	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
 
 	const form = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			name: '',
 			email: '',
 			password: '',
 		}
@@ -25,7 +26,7 @@ export function LoginForm() {
 
 	const onSubmit = (values: LoginSchemaType) => {
 		if (recaptchaValue) {
-			console.log(values)
+			login({ values, recaptcha: recaptchaValue })
 		} else {
 			toast.error('Пожалуйста, пройдите ReCAPTCHA')
 		}
@@ -46,22 +47,6 @@ export function LoginForm() {
 				>
 					<FormField
 						control={form.control}
-						name='name'
-						render={({field}) => (
-							<FormItem>
-								<FormLabel>Имя</FormLabel>
-								<FormControl>
-									<Input
-										placeholder='Иван'
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage/>
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
 						name='email'
 						render={({field}) => (
 							<FormItem>
@@ -69,6 +54,7 @@ export function LoginForm() {
 								<FormControl>
 									<Input
 										placeholder='ivan@example.com'
+										disabled={isLoadingLogin}
 										type='email'
 										{...field}
 									/>
@@ -86,6 +72,7 @@ export function LoginForm() {
 								<FormControl>
 									<Input
 										placeholder='******'
+										disabled={isLoadingLogin}
 										type='password'
 										{...field}
 									/>
@@ -103,7 +90,12 @@ export function LoginForm() {
 						/>
 					</div>
 
-					<Button type='submit'>Войти в аккаунт</Button>
+					<Button
+						type='submit'
+						disabled={isLoadingLogin}
+					>
+						Войти в аккаунт
+					</Button>
 				</form>
 			</Form>
 		</AuthWrapper>

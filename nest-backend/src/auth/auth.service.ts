@@ -29,7 +29,7 @@ export class AuthService {
 		private readonly twoFactorAuthService: TwoFactorAuthService
 	) {}
 
-	public async register(req: Request, dto: RegisterDTO) {
+	public async register(dto: RegisterDTO) {
 		const isExists = await this.userService.findByEmail(dto.email)
 
 		if (isExists) {

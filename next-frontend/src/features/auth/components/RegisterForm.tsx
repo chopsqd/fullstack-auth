@@ -9,9 +9,11 @@ import React, { useState } from 'react'
 import { useTheme } from 'next-themes'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { toast } from 'sonner'
+import { useRegisterMutation } from '@/features/auth/hooks'
 
 export function RegisterForm() {
 	const {theme} = useTheme()
+	const {register, isLoadingRegister} = useRegisterMutation()
 	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
 
 	const form = useForm<RegisterSchemaType>({
@@ -26,7 +28,7 @@ export function RegisterForm() {
 
 	const onSubmit = (values: RegisterSchemaType) => {
 		if (recaptchaValue) {
-			console.log(values)
+			register({values, recaptcha: recaptchaValue})
 		} else {
 			toast.error('Пожалуйста, пройдите ReCAPTCHA')
 		}
@@ -54,6 +56,7 @@ export function RegisterForm() {
 								<FormControl>
 									<Input
 										placeholder='Иван'
+										disabled={isLoadingRegister}
 										{...field}
 									/>
 								</FormControl>
@@ -70,6 +73,7 @@ export function RegisterForm() {
 								<FormControl>
 									<Input
 										placeholder='ivan@example.com'
+										disabled={isLoadingRegister}
 										type='email'
 										{...field}
 									/>
@@ -87,6 +91,7 @@ export function RegisterForm() {
 								<FormControl>
 									<Input
 										placeholder='******'
+										disabled={isLoadingRegister}
 										type='password'
 										{...field}
 									/>
@@ -104,6 +109,7 @@ export function RegisterForm() {
 								<FormControl>
 									<Input
 										placeholder='******'
+										disabled={isLoadingRegister}
 										type='password'
 										{...field}
 									/>
@@ -121,7 +127,12 @@ export function RegisterForm() {
 						/>
 					</div>
 
-					<Button type='submit'>Создать аккаунт</Button>
+					<Button
+						type='submit'
+						disabled={isLoadingRegister}
+					>
+						Создать аккаунт
+					</Button>
 				</form>
 			</Form>
 		</AuthWrapper>
