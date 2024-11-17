@@ -1,15 +1,15 @@
 'use client'
 
-import { AuthWrapper } from '@/features/auth/components/AuthWrapper'
-import { useForm } from 'react-hook-form'
-import { RegisterSchema, RegisterSchemaType } from '@/features/auth/schemes'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '@/shared/ui/components'
-import React, { useState } from 'react'
-import { useTheme } from 'next-themes'
+import {AuthWrapper} from '@/features/auth/components/AuthWrapper'
+import {useForm} from 'react-hook-form'
+import {RegisterSchema, RegisterSchemaType} from '@/features/auth/schemes'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input} from '@/shared/ui/components'
+import React, {useState} from 'react'
+import {useTheme} from 'next-themes'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { toast } from 'sonner'
-import { useRegisterMutation } from '@/features/auth/hooks'
+import {toast} from 'sonner'
+import {useRegisterMutation} from '@/features/auth/hooks'
 
 export function RegisterForm() {
 	const {theme} = useTheme()

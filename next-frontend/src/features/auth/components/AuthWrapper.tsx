@@ -1,7 +1,7 @@
-import { type PropsWithChildren } from 'react'
-import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shared/ui/components'
+import {type PropsWithChildren} from 'react'
+import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/shared/ui/components'
 import Link from 'next/link'
-import { AuthSocial } from '@/features/auth/components/AuthSocial'
+import {AuthSocial} from '@/features/auth/components/AuthSocial'
 
 interface AuthWrapperProps {
 	heading: string

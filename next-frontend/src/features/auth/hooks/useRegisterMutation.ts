@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query'
-import { authService } from '@/features/auth/services'
-import { RegisterSchemaType } from '@/features/auth/schemes'
-import { toastMessage } from '@/shared/utils'
+import {useMutation} from '@tanstack/react-query'
+import {authService} from '@/features/auth/services'
+import {RegisterSchemaType} from '@/features/auth/schemes'
+import {toastMessage} from '@/shared/utils'
 
 export function useRegisterMutation() {
 	const {mutate: register, isPending: isLoadingRegister} = useMutation({

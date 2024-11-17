@@ -1,6 +1,6 @@
-import { LoginSchemaType, RegisterSchemaType } from '@/features/auth/schemes'
-import { API } from '@/shared/api'
-import { IUser } from '../types'
+import {LoginSchemaType, RegisterSchemaType} from '@/features/auth/schemes'
+import {API} from '@/shared/api'
+import {IUser} from '../types'
 
 class AuthService {
 	public async register(body: RegisterSchemaType, recaptcha?: string) {
@@ -13,6 +13,10 @@ class AuthService {
 		const headers = recaptcha ? {recaptcha} : undefined
 
 		return await API.post<IUser>('auth/login', body, { headers })
+	}
+
+	public async oauthByProvider(provider: 'google' | 'yandex') {
+		return await API.get<{ url: string }>(`auth/oauth/connect/${provider}`)
 	}
 
 	public async logout() {

@@ -1,5 +1,5 @@
-import { FetchError } from './fetch-error'
-import { RequestOptions, SearchParamsType } from '@/shared/utils/fetch/types'
+import {FetchError} from './fetch-error'
+import {RequestOptions, SearchParamsType} from '@/shared/utils/fetch/types'
 
 /**
  * Класс для выполнения HTTP-запросов с использованием Fetch API.
